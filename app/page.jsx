@@ -1,6 +1,8 @@
 'use client'
 
-import { Cloud, Clouds } from '@react-three/drei'
+import { Dreams } from '@/components/Dreams'
+import { images } from '@/resources'
+import { Cloud, Clouds, MeshReflectorMaterial } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { useState } from 'react'
 import * as THREE from 'three'
@@ -103,6 +105,24 @@ export default function Page() {
         )}
       </div>
       <Canvas>
+        <group position={[0, -0.5, 0.5]}>
+          <Dreams images={images} />
+          <mesh rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[50, 50]} />
+            <MeshReflectorMaterial
+              blur={[300, 100]}
+              resolution={2048}
+              mixBlur={1}
+              mixStrength={80}
+              roughness={1}
+              depthScale={1.2}
+              minDepthThreshold={0.4}
+              maxDepthThreshold={1.4}
+              color='#050505'
+              metalness={0.5}
+            />
+          </mesh>
+        </group>
         <Clouds material={THREE.MeshBasicMaterial}>
           <Cloud position={[0, 0, 0]} seed={10} color='aqua' opacity={0.8} transparent />
         </Clouds>
