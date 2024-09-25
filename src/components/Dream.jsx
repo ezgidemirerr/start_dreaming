@@ -5,10 +5,10 @@ import { useRef, useState } from 'react'
 import * as THREE from 'three'
 import getUuid from 'uuid-by-string'
 import { AudioImage } from './AudioImage'
-
+import { VideoBox } from './VideoBox'
 const GOLDENRATIO = 1.61803398875
 
-export function Dream({ url, c = new THREE.Color(), isActive, isStill, audioUrl, onClick, ...props }) {
+export function Dream({ url, c = new THREE.Color(), isActive, isVideo, isStill, audioUrl, onClick, ...props }) {
   const frameRef = useRef()
   const contentRef = useRef()
   const [hovered, hover] = useState(false)
@@ -50,16 +50,28 @@ export function Dream({ url, c = new THREE.Color(), isActive, isStill, audioUrl,
           roughness={0.5}
           envMapIntensity={2}
         />
-        <AudioImage
-          ref={contentRef}
-          url={url}
-          audioUrl={audioUrl}
-          isActive={isActive}
-          position={[0, 0, 0.7]}
-          onPointerOver={handlePointerOver}
-          onPointerOut={handlePointerOut}
-          onClick={handleClick}
-        />
+        {isVideo ? (
+          <VideoBox
+            isActive={isActive}
+            ref={contentRef}
+            url={url}
+            position={[0, 0, 0.7]}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            onClick={handleClick}
+          />
+        ) : (
+          <AudioImage
+            ref={contentRef}
+            url={url}
+            audioUrl={audioUrl}
+            isActive={isActive}
+            position={[0, 0, 0.7]}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            onClick={handleClick}
+          />
+        )}
       </mesh>
       <Text fontSize={0.028} maxWidth={0.3} anchorX='left' anchorY='top' position={[0.55, GOLDENRATIO, 0]}>
         {props.name}
