@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import CombinedScene from '@/components/CombinedScene'
-import { images } from '@/resources'
+import { dream_sources } from '@/resources'
 
 export default function Page() {
   const [currentScene, setCurrentScene] = useState('clouds')
@@ -101,7 +101,7 @@ export default function Page() {
           </div>
         )}
       </div>
-      <CombinedScene images={images} currentScene={currentScene} />
+      <CombinedScene images={dream_sources} currentScene={currentScene} />
     </div>
   )
 }

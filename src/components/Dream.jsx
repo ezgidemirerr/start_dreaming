@@ -5,10 +5,22 @@ import { useRef, useState } from 'react'
 import * as THREE from 'three'
 import getUuid from 'uuid-by-string'
 import { AudioImage } from './AudioImage'
+import { Kaleidoscope } from './Kaleidoscope'
 import { VideoBox } from './VideoBox'
+
 const GOLDENRATIO = 1.61803398875
 
-export function Dream({ url, c = new THREE.Color(), isActive, isVideo, isStill, audioUrl, onClick, ...props }) {
+export function Dream({
+  url,
+  c = new THREE.Color(),
+  isActive,
+  isKaleidoscope,
+  isVideo,
+  isStill,
+  audioUrl,
+  onClick,
+  ...props
+}) {
   const frameRef = useRef()
   const contentRef = useRef()
   const [hovered, hover] = useState(false)
@@ -60,7 +72,18 @@ export function Dream({ url, c = new THREE.Color(), isActive, isVideo, isStill, 
             onPointerOut={handlePointerOut}
             onClick={handleClick}
           />
-        ) : (
+        ) : isKaleidoscope ? (
+          <Kaleidoscope
+            ref={contentRef}
+            url={url}
+            audioUrl={audioUrl}
+            isActive={isActive}
+            position={[0, 0, 0.7]}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            onClick={handleClick}
+          />
+        ) : isStill ? (
           <AudioImage
             ref={contentRef}
             url={url}
@@ -71,7 +94,7 @@ export function Dream({ url, c = new THREE.Color(), isActive, isVideo, isStill, 
             onPointerOut={handlePointerOut}
             onClick={handleClick}
           />
-        )}
+        ) : null}
       </mesh>
       <Text fontSize={0.028} maxWidth={0.3} anchorX='left' anchorY='top' position={[0.55, GOLDENRATIO, 0]}>
         {props.name}

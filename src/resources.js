@@ -1,12 +1,12 @@
-export const images = [
+export const dream_sources = [
   {
     position: [0, 0, 1.5],
     rotation: [0, 0, 0],
-    url: '/images/unseen.png',
-    audioUrl: '/songs/unseen.mov',
-    isStill: true,
-    name: 'Unseen',
-    type: 'Still Image',
+    url: '/images/can_you_dream.jpg',
+    isKaleidoscope: true,
+    audioUrl: '/songs/can_you_dream.mov',
+    name: 'Can you dream?',
+    type: 'Coded Kaleidoscope',
   },
   // Back
   {
